@@ -1,18 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
 
-    <script src="./utils/math.js"></script>
-    <script src="./utils/format.js"></script>
+        thead {
+            background-color: #f5f5f5;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <template v-if="books.length">
+            <!-- 1. 搭建界面内容 -->
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>书籍名称</th>
+                        <th>出版日期</th>
+                        <th>价格</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(book, index) in books" :key="book.id">
+                        <!-- 不用book.id而用index来编号，否则移除书籍后编号会错乱 -->
+                        <td>{{index + 1}}</td>
+                        <td>{{book.name}}</td>
+                        <td>{{book.date}}</td>
+                        <td>{{formatPrice(book.price)}}</td>
+                        <td>
+                            <!-- item.count <= 1为true，则禁用-按钮 -->
+                            <button :disabled="book.count <= 1" @click="subBookCount(index)">-</button>
+                            {{book.count}}
+                            <button @click="addBookCount(index)">+</button>
+                        </td>
+                        <td>
+                            <button @click="removeBook(index)">移除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>总价：<span>{{formatPrice(totalPrice)}}</span></h2>
+        </template>
+
+        <template v-else>
+            <h1>购物车为空，请添加您喜欢的书籍</h1>
+            <p>商城中有大量书籍，请选择添加学习</p>
+        </template>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/data.js"></script>
     <script>
 
-        console.log("aaa");
+        const app = Vue.createApp({
+            data() {
+                return {
+                    books: books,
+                }
+            },
+
+            methods: {
+                // 定义一个格式化价格的方法，在价格前面加上￥符号，统一代码逻辑，方便后期修改代码
+                formatPrice(price) {
+                    return "￥" + price;
+                },
+
+                subBookCount(index) { // 也可以传入book，直接修改book.count
+                    this.books[index].count--;
+                },
+
+                addBookCount(index) {
+                    this.books[index].count++;
+                },
+
+                removeBook(index) {
+                    this.books.splice(index, 1);
+                }
+            },
+            computed: {
+                totalPrice() {
+                    // 1. 直接遍历books
+                    /* let price = 0;
+                    for (const item of this.books) {
+                        price += item.price * item.count;
+                    }
+                    return price; */
+
+                    // 2. 利用reduce方法
+                    return this.books.reduce((preValue, item) => {
+                        return preValue + item.price * item.count;
+                    }, 0)
+
+                }
+            }
+        });
+        app.mount("#app");
+
     </script>
 </body>
+
 </html>
