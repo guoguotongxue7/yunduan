@@ -1,0 +1,4 @@
+/* 为了避免在Main.js中引入太多css文件，可以将其他css文件集中引入到index.css中 */
+
+@import "./reset.css";
+@import "./common.css";
