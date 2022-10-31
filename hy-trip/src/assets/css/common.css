@@ -1,4 +1,42 @@
+:root {
+    /* 主题颜色 */
+    --primary-color: #ff9854;
+    
+    /* 搜索框颜色重写 */
+    --van-search-left-icon-color: var(--primary-color);
+
+    /* 细线颜色 */
+    --line-color: #f5f5f5;
+
+    /* 渐变色 */
+    --theme-linear-gradient-color: linear-gradient(90deg, #fa8c1d, #fcaf3f);
+
+    /* navBar主题色修改 */
+    --van-primary-color:var(--primary-color);
+}
+
+
 body {
     font-size: 14px;
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
 }
+
+
+.top-page {  /* 隐藏底部标签栏的类，可以直接在需要隐藏标签栏的页面上加top-page类名 */
+    position:relative;
+    z-index: 9;
+    height: 100vh;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+.bottom-gray-line {
+    border-bottom: 1px dashed #f2f2f2;
+}
+
+.icon_check {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url(../img/detail/icon_check.png) 0 0 / 100% 100%;
+  }

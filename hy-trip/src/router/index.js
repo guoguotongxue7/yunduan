@@ -11,6 +11,7 @@ const router = createRouter({
         {
             path: "/home",
             component: ()=> import("@/views/home/home.vue")
+            // component: ()=> import("@/views/home/homeTest.vue")
         },
         {
             path: "/order",
@@ -18,12 +19,33 @@ const router = createRouter({
         },
         {
             path: "/message",
-            component: ()=> import("@/views/message/message.vue")
+            component: ()=> import("@/views/message/message.vue"),
+            meta: {  // 隐藏页面底部的标签栏可以通过路由的meta属性来控制，也可以利用top-page类css来控制
+                hideTabBar: true,
+            }
         },
         {
             path: "/favor",
             component: ()=> import("@/views/favor/favor.vue")
         },
+        {
+            path: "/city",
+            component: ()=> import("@/views/city/city.vue"),
+            meta: {  // 隐藏页面底部的标签栏可以通过路由的meta属性来控制，也可以利用top-page类css来控制
+                hideTabBar: true,
+            }
+        },
+        {
+            path: "/search",
+            component: ()=> import("@/views/search/search.vue"),
+            meta: {  // 隐藏页面底部的标签栏可以通过路由的meta属性来控制，也可以利用top-page类css来控制
+                hideTabBar: true,
+            }
+        },
+        {
+            path: "/detail/:id",
+            component: ()=> import("@/views/detail/detail.vue")
+        }
     ]
 })
 

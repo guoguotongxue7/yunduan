@@ -14,9 +14,13 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "jsx":"preserve"
+    
   },
   "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport": true
+    "experimentalDisableTemplateSupport": false
   },
+
+
 }
